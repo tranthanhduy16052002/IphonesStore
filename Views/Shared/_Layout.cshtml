@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width" />
+<title>IphonesStore</title>
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+<div>
+<div class="bg-dark text-white p-2">
+<div class="container-fluid">
+<div class="row">
+<div class="col navbar-brand">IPHONES STORE</div>
+<div class="col-6 text-right">
+<vc:cart-summary />
+</div>
+</div>
+</div>
+</div><div class="row m-1 p-1">
+<div id="genres" class="col-3">
+<p>The IphonesStore homepage helps you explore Earth's Biggest
+Iphonestore without ever leaving the comfort of your couch.</p>
+<vc:genre-navigation />
+</div>
+<div class="col-9">
+@RenderBody()
+</div>
+</div>
+</div>
+</body>
+</html>

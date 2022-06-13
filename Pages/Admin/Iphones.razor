@@ -1,0 +1,68 @@
+﻿@page "/admin/iphones"
+@page "/admin"
+@inherits OwningComponentBase<IIphonesStoreRepository>
+<table class="table table-sm table-striped table-bordered">
+<thead>
+<tr>
+<th>ID</th>
+<th>Tên Sản Phẩm</th>
+<th>Loại Máy</th>
+<th>Giá Thành</th>
+<td />
+</tr>
+</thead><tbody>
+@if (IphoneData?.Count() > 0)
+{
+@foreach (Iphone b in IphoneData)
+{
+<tr>
+<td>@b.IphoneID</td>
+<td>@b.Title</td>
+<td>@b.Genre</td>
+<td>@b.Price.ToString("c")</td>
+<td>
+<NavLink class="btn btn-info btn-sm"
+href="@GetDetailsUrl(b.IphoneID)">
+Chi Tiết
+</NavLink>
+<NavLink class="btn btn-warning btn-sm"
+href="@GetEditUrl(b.IphoneID)">
+Sửa
+</NavLink>
+<button class="btn btn-danger btn-sm"
+@onclick="@(e => DeleteIphone(b))">
+Xóa
+</button>
+</td>
+</tr>
+}
+}
+else
+{
+<tr>
+<td colspan="5" class="text-center">No Iphones</td>
+</tr>
+}
+
+</tbody>
+</table>
+<NavLink class="btn btn-primary" href="/admin/iphones/create">Create</NavLink>
+@code {
+public IIphonesStoreRepository Repository => Service;
+public IEnumerable<Iphone> IphoneData { get; set; }
+protected async override Task OnInitializedAsync()
+{
+await UpdateData();
+}
+public async Task UpdateData()
+{
+IphoneData = await Repository.Iphones.ToListAsync();
+}
+public async Task DeleteIphone(Iphone b)
+{
+Repository.DeleteIphone(b);
+await UpdateData();
+}
+public string GetDetailsUrl(long id) => $"/admin/iphones/details/{id}";
+public string GetEditUrl(long id) => $"/admin/iphones/edit/{id}";
+}

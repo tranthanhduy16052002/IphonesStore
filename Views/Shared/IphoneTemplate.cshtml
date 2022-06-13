@@ -1,0 +1,23 @@
+﻿@model Iphone
+<div class="card" style="width: 100%;">
+<div class="card-body">
+<h5 class="card-title">
+@Model.Title
+<span class="badge badge-pill badge-primary">
+<small>@Model.Price.ToString("c")</small>
+</span>
+</h5>
+<form id="@Model.IphoneID" asp-page="/MyCart" method="post">
+<input type="hidden" asp-for="IphoneID" />
+<input type="hidden" name="returnUrl"
+value="@ViewContext.HttpContext.Request.PathAndQuery()" /><div class="card-text p-1">
+<strong>@Model.Genre</strong>
+<p>@Model.Description</p>
+<button type="submit"
+class="btn btn-danger btn-sm pull-right">
+Thêm vào giỏ hàng
+</button>
+</div>
+</form>
+</div>
+</div>
